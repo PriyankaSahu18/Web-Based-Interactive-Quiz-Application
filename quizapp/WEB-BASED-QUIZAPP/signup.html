@@ -1,0 +1,66 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="signup.css" />
+    <script>
+        // Handle signup and password validation
+        function handleSignup(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            
+             // ✅ Strong password regex:
+            // At least 8 chars, one uppercase, one lowercase, one number, one special char
+            const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!strongPasswordRegex.test(password)) {
+                alert("Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.");
+                return;
+            }
+           if (password !== confirmPassword)  {
+               alert("Passwords do not match!");
+                return;
+          } 
+
+            // Store data in localStorage and redirect
+            localStorage.setItem("username", username);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+            alert("Signup successful! Please log in.");
+            window.location.href = "learninglogin.html"; // Redirect to login page
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Signup</h2>
+        <form onsubmit="handleSignup(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required />
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required />
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" required />
+            <!-- 🔹 Added password requirements note -->
+            <small style="color: black; font-size: 12px;">
+                Password must be at least 8 characters long and include an uppercase letter, 
+                a lowercase letter, a number, and a special character (@$!%*?&).
+            </small>
+            
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" required />
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="learninglogin.html">Login here</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!--certificate.html-->
+<!--DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <style>
+        .certificate-container {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center center;
+            border-radius: 8px;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+}
+
+/* Heading for the certificate */
+.certificate-container h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #4CAF50; /* Green color for the title */
+    margin-bottom: 20px;
+}
+
+/* Badge/logo position */
+.badge-logo {
+    position: absolute;
+    top: 20px;  /* Distance from the top */
+    left: 20px;  /* Distance from the left */
+    width: 150px;  /* Increase the size of the logo */
+    height: 150px; /* Increase the size of the logo */
+    object-fit: contain; /* Ensure the logo is scaled proportionally */
+}
+
+
+/* Content of the certificate */
+.certificate-content p {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.certificate-content h3, .certificate-content h4 {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Styling for the print button */
+button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        // Function to generate and display the certificate with an appreciation message
+        function generateCertificate() {
+            const username = localStorage.getItem("username");
+            const score = localStorage.getItem("score");
+            const quizTitle = "Interactive Quiz";
+
+            if (!username || !score) {
+                alert("No score found. Please complete the quiz first.");
+                window.location.href = "learningquizpage.html"; // Redirect back to the quiz page
+                return;
+            }
+
+            document.getElementById("username").textContent = username;
+            document.getElementById("quiz-title").textContent = quizTitle;
+            document.getElementById("score").textContent = score;
+
+            const appreciationMessage = generateAppreciationMessage(score);
+            document.getElementById("appreciation-message").textContent = appreciationMessage;
+        }
+
+        function generateAppreciationMessage(score) {
+            const maxScore = 10; 
+            const percentage = (score / maxScore) * 100;
+
+            if (percentage >= 90) {
+                return "Excellent! Keep up the great work!";
+            } else if (percentage >= 75) {
+                return "Great job! You're on fire!";
+            } else if (percentage >= 50) {
+                return "Good effort! You're doing well!";
+            } else {
+                return "Keep practicing! You'll get there!";
+            }
+        }
+
+        function downloadCertificate() {
+            const element = document.getElementById("certificate-container");
+            if (element) {
+                html2pdf()
+                    .from(element)
+                    .save('certificate.pdf');
+            }
+        }
+
+        window.onload = generateCertificate;        // Function to trigger the PDF download
+       /*function downloadCertificate() {
+            const element = document.getElementById("certificate-container");
+
+            // Check if the certificate container exists
+            if (element) {
+                html2pdf()
+                    .from(element)
+                    .save('certificate.pdf')
+                    .then(function() {
+                        console.log("Certificate download started!");
+                    }).catch(function(err) {
+                        console.error("Error in generating PDF:", err);
+                    });
+            } else {
+               console.error("Certificate container not found."); }
+        }
+
+         function backToQuiz() {
+            window.location.href = "learningquizpage.html";
+        }
+
+        // Call the function when the page loads
+        window.onload = generateCertificate;
+        */
+    </script>
+</head>
+<body>
+    <!-- Certificate content container >
+    <div class="certificate-container" id="certificate-container">
+        <img src="seal.png" alt="Badge Logo" class="badge-logo" />
+        <h2>Certificate of Completion</h2>
+        <div class="certificate-content">
+            <p>This is to certify that</p>
+            <h3 id="username">[Username]</h3>
+            <p>has successfully completed the</p>
+            <h4 id="quiz-title">[Quiz Title]</h4>
+            <p>with a score of</p>
+            <h3 id="score">[Score]</h3>
+            <p id="appreciation-message">[Appreciation Message]</p>
+            <p>Thank you for participating!</p>
+        </div>
+                <!-- 🔹 Added Buttons >
+        <button onclick="downloadCertificate()">Download Certificate</button>
+        <button onclick="backToQuiz()">Back to Quiz</button>
+    </div>
+</body>
+</html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <style>
+        .certificate-container {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center center;
+            border-radius: 8px;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Heading for the certificate */
+        .certificate-container h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50; /* Green color for the title */
+            margin-bottom: 20px;
+        }
+
+        /* Badge/logo position */
+        .badge-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        /* Content of the certificate */
+        .certificate-content p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .certificate-content h3, .certificate-content h4 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        /* Styling for the back button */
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+        // Function to generate and display the certificate with an appreciation message
+        function generateCertificate() {
+            const username = localStorage.getItem("username");
+            const score = localStorage.getItem("score");
+            const quizTitle = "Interactive Quiz";
+
+            if (!username || !score) {
+                alert("No score found. Please complete the quiz first.");
+                window.location.href = "learningquizpage.html";
+                return;
+            }
+
+            document.getElementById("username").textContent = username;
+            document.getElementById("quiz-title").textContent = quizTitle;
+            document.getElementById("score").textContent = score;
+
+            const appreciationMessage = generateAppreciationMessage(score);
+            document.getElementById("appreciation-message").textContent = appreciationMessage;
+        }
+
+        function generateAppreciationMessage(score) {
+            const maxScore = 10; 
+            const percentage = (score / maxScore) * 100;
+
+            if (percentage >= 90) {
+                return "Excellent! Keep up the great work!";
+            } else if (percentage >= 75) {
+                return "Great job! You're on fire!";
+            } else if (percentage >= 50) {
+                return "Good effort! You're doing well!";
+            } else {
+                return "Keep practicing! You'll get there!";
+            }
+        }
+
+        function backToQuiz() {
+            window.location.href = "learningquizpage.html";
+        }
+
+        // Call the function when the page loads
+        window.onload = generateCertificate;
+    </script>
+</head>
+<body>
+    <!-- Certificate content container -->
+    <div class="certificate-container" id="certificate-container">
+        <img src="seal.png" alt="Badge Logo" class="badge-logo" />
+        <h2>Certificate of Completion</h2>
+        <div class="certificate-content">
+            <p>This is to certify that</p>
+            <h3 id="username">[Username]</h3>
+            <p>has successfully completed the</p>
+            <h4 id="quiz-title">[Quiz Title]</h4>
+            <p>with a score of</p>
+            <h3 id="score">[Score]</h3>
+            <p id="appreciation-message">[Appreciation Message]</p>
+            <p>Thank you for participating!</p>
+        </div>
+
+        <!-- Back to Quiz Button -->
+        <button onclick="backToQuiz()">Back to Quiz</button>
+    </div>
+</body>
+</html>
